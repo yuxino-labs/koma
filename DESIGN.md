@@ -90,6 +90,6 @@ GitHub 登录后的新任务归属账号，跨浏览器恢复；结果与文件�
 
 本轮视觉改版不增加服务端能力，也不更换 Provider 配置。API 及迁移约定见 [GitHub 工作区决策](docs/decisions/0003-github-workspaces.md)。
 
-当前人物为 [`public/koma-family-logo.png`](public/koma-family-logo.png)，512px 透明 PNG。品牌、README、社交预览、浏览器与 Apple Touch 图标使用同一素材。保留完整的圆形构图，不再次裁切。用户头像独立于品牌人物；图片加载失败显示用户名首字。尺寸与生成提示词见[角色素材说明](docs/visual-assets.md)。
+当前人物为 [`public/koma-family-logo.png`](public/koma-family-logo.png)，512px 透明 PNG。品牌、README、社交预览、浏览器与 Apple Touch 图标使用同一素材。仅保留人物，背景透明；不加圆环、星星、底纹或装饰底座，保留完整轮廓。用户头像独立于品牌人物；图片加载失败显示用户名首字。尺寸与生成提示词见[角色素材说明](docs/visual-assets.md)。
 
 Logo 的生成提示词、尺寸与使用范围见 [Logo 素材说明](docs/logo-assets.md)。
