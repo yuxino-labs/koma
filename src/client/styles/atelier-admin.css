@@ -95,7 +95,7 @@
   flex: 0 0 auto;
   object-fit: contain;
   border: 0;
-  border-radius: 50%;
+  border-radius: 0;
   background: transparent;
 }
 
@@ -262,7 +262,7 @@
   margin: 0 0 25px;
   object-fit: contain;
   border: 0;
-  border-radius: 50%;
+  border-radius: 0;
   background: transparent;
 }
 

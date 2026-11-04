@@ -6,7 +6,7 @@ beforeEach(() => { vi.useFakeTimers({ now: NOW }); });
 afterEach(() => { vi.useRealTimers(); vi.unstubAllGlobals(); });
 
 function snapshot(count: number) { return { count, checkedAt: new Date(NOW).toISOString() }; }
-function fetcher(data: unknown = { full_name: "yuxino/koma", stargazers_count: 9 }) {
+function fetcher(data: unknown = { full_name: "yuxino-labs/koma", stargazers_count: 9 }) {
   return vi.fn<typeof fetch>().mockResolvedValue(new Response(JSON.stringify(data), { status: 200 }));
 }
 
@@ -19,18 +19,18 @@ describe("uncached GitHub star requests", () => {
     const request = fetcher(); vi.stubGlobal("fetch", request);
     vi.resetModules();
     const stars = await import("./github-stars");
-    expect(stars.GITHUB_STAR_SNAPSHOT).toEqual({ count: 2, checkedAt: "2026-09-07T15:46:30.053665+00:00" });
+    expect(stars.GITHUB_STAR_SNAPSHOT).toEqual(GITHUB_STAR_SNAPSHOT);
     expect(request).not.toHaveBeenCalled();
     expect(await stars.refreshGithubStars()).toEqual(snapshot(9));
   });
 
-  it("requests fresh anonymous data on every call and accepts a real zero", async () => {
-    const request = fetcher({ full_name: "yuxino/koma", stargazers_count: 0 });
-    request.mockResolvedValueOnce(new Response(JSON.stringify({ full_name: "yuxino/koma", stargazers_count: 7 })));
+  it("accepts the transferred repository response and requests fresh counts including zero", async () => {
+    const request = fetcher({ full_name: "yuxino-labs/koma", stargazers_count: 0 });
+    request.mockResolvedValueOnce(new Response(JSON.stringify({ full_name: "yuxino-labs/koma", stargazers_count: 7 })));
     expect(await refreshGithubStars({ fetcher: request, now: NOW })).toEqual(snapshot(7));
     expect(await refreshGithubStars({ fetcher: request, now: NOW })).toEqual(snapshot(0));
     expect(request).toHaveBeenCalledTimes(2);
-    for (const call of request.mock.calls) expect(call).toEqual(["https://api.github.com/repos/yuxino/koma", {
+    for (const call of request.mock.calls) expect(call).toEqual(["https://api.github.com/repos/yuxino-labs/koma", {
       headers: { Accept: "application/vnd.github+json" }, credentials: "omit", cache: "no-store", signal: expect.any(AbortSignal)
     }]);
     expect(vi.getTimerCount()).toBe(0);

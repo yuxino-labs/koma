@@ -1,12 +1,13 @@
+import { REPOSITORY } from "./public-site.js";
+
 export interface StarSnapshot { readonly count: number; readonly checkedAt: string }
 
 export const GITHUB_STAR_SNAPSHOT: StarSnapshot = Object.freeze({
-  count: 2,
-  checkedAt: "2026-09-07T15:46:30.053665+00:00"
+  count: 298,
+  checkedAt: "2026-11-04T11:58:33Z"
 });
 
 const REQUEST_TIMEOUT_MS = 5_000;
-const REPOSITORY = "yuxino/koma";
 
 interface RefreshOptions {
   fetcher?: typeof fetch;

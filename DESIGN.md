@@ -11,14 +11,14 @@ Koma 是 AI 视频分析网站，帮助用户从视频中获得总结、章节�
 - 首页、页头与 README 明确表达视频分析用途，围绕“分析视频、查看结果、定位片段、提取数据、导出结果”组织说明。
 - 保留亲切、简短的语气。角色可以招呼用户、说明下一步；“笔记”只用于具体的输出用途，不概括整个产品或替代分析流程名称。
 - 来源、分析要求、结果的流程文案使用“放入视频 → 告诉我要求 → 查看分析”；导出按钮说明实际导出的分析结果或字幕。
-- README 默认使用英文，页首保留简体中文切换；中文版提供返回英文的链接。两版能力、登录要求、配置前提与隐私边界保持一致。
-- 仓库入口链接到 `https://github.com/yuxino/koma/`，使用“Star on GitHub”或“在 GitHub 点个 Star”等清楚文案；与“通过 GitHub 登录”分别命名，不混淆访问仓库和账号登录。
+- README 默认使用简体中文（`README.md`），页首链接英文版（`README.en.md`）；两版保留语言切换。两版能力、登录要求、配置前提与隐私边界保持一致。
+- 仓库入口链接到 `https://github.com/yuxino-labs/koma/`，使用“Star on GitHub”或“在 GitHub 点个 Star”等清楚文案；与“通过 GitHub 登录”分别命名，不混淆访问仓库和账号登录。
 
 ## 视觉概念
 
 - 公共界面以白色、柔和黑色和中性灰建立层级，通过排版、间距和细线区分内容，不使用青柠或其他彩色品牌强调。
-- 当前角色参考 Kiri 新版近景的圆脸、大眼与柔和线条：奶白单高马尾、一个黑色蝴蝶结、明亮灰棕眼睛，穿米白毛衣与黑色背带裙，双手抱着黑白场记板。画面聚焦脸和肩部。
-- 角色采用圆脸、大眼与柔和线条的动漫近景表达，保持自然微笑和完整的日常衣着。肤色与淡粉腮红是少量自然暖色，不扩展为界面配色。
+- 当前角色为黑白漫画风的成年女性剪辑助手：黑色短发、贝雷帽、白衬衫与深色背心，双手抱着黑白场记板。头像使用同一人物的面部特写，欢迎、工作区和状态页共用半身插画。素材与提示词见 `docs/logo-assets.md` 和 `docs/visual-assets.md`。
+- 角色采用清晰墨线、黑白色块和少量中性灰，保持自然微笑和完整日常衣着，不使用彩色腮红或渐变。
 - 人物、文字气泡与简短招呼只辅助介绍、等待和空状态，不遮挡表单、视频、字幕或结果，也不暗示对话机器人等未实现能力。
 - 时间码、播放位置和章节编号继续服务于真实内容；不以装饰取景框、密集英文标签或大幅标题替代产品结构。
 
@@ -90,6 +90,6 @@ GitHub 登录后的新任务归属账号，跨浏览器恢复；结果与文件�
 
 本轮视觉改版不增加服务端能力，也不更换 Provider 配置。API 及迁移约定见 [GitHub 工作区决策](docs/decisions/0003-github-workspaces.md)。
 
-当前角色资产为 [`public/koma-ponytail-portrait.webp`](public/koma-ponytail-portrait.webp)，采用极浅中性实底的原生近景。图片以完整近景配小圆角展示。小尺寸品牌头像使用用户指定图片的圆形裁切版本 [`public/koma-logo-round.png`](public/koma-logo-round.png)，为 512px PNG，圆外具有真实透明通道；浏览器图标使用同款 64px [`public/koma-favicon-round.png`](public/koma-favicon-round.png)。页面插画与 Logo 的用途分开，不再把全身图放大裁切。页面插画的生成参考、实际尺寸与完整提示词见[角色素材说明](docs/visual-assets.md)。
+当前半身插画为 [`public/koma-editor-portrait.png`](public/koma-editor-portrait.png)，768px 透明 PNG。小尺寸头像为 [`public/koma-editor-logo.png`](public/koma-editor-logo.png)，512px 透明 PNG。两者共用黑色短发、贝雷帽与黑白漫画风；保留完整轮廓，不使用圆形裁切。浏览器图标与 Apple Touch 图标由同一头像导出。插画的尺寸与生成提示词见[角色素材说明](docs/visual-assets.md)。
 
-Logo 的用户指定原图、圆形透明裁切、尺寸与使用范围见 [Logo 素材说明](docs/logo-assets.md)。
+Logo 的生成提示词、尺寸与使用范围见 [Logo 素材说明](docs/logo-assets.md)。
