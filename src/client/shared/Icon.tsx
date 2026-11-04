@@ -1,6 +1,9 @@
 import type { SVGProps } from "react";
 
 const shapes = {
+  library: <><rect x="4" y="3" width="16" height="18" rx="2" /><path d="M8 7h8M8 11h8M8 15h5" /></>,
+  info: <><circle cx="12" cy="12" r="9" /><path d="M12 11v6M12 7h.01" /></>,
+  "sign-out": <><path d="M9 4H5v16h4M10 12h11m-4-4 4 4-4 4" /></>,
   "arrow-up-right": <path d="M6 18 18 6M6 6h12v12" />,
   "arrow-up": <path d="M12 20V4m-7 7 7-7 7 7" />,
   "arrow-down": <path d="M12 4v16m-7-7 7 7 7-7" />,
