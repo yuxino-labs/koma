@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="public/koma-editor-logo.png" width="112" alt="Koma">
+  <img src="public/koma-family-logo.png" width="112" alt="Koma">
   <h1>Koma</h1>
   <p>整理视频摘要，搜索字幕，回看原片。</p>
   <p>简体中文 · <a href="README.en.md">English</a> · <a href="https://koma.yuxino.cn/zh/">在线体验</a> · <a href="https://github.com/yuxino-labs/koma/issues">问题反馈</a></p>

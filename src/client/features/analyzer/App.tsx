@@ -21,6 +21,7 @@ import { attachFieldDescriptions, summarizeOutputSchema, type OutputSchemaSummar
 import { progressStepStates, translateProgressDetail } from "../../shared/progress.js";
 import { translateTagCategory } from "../../shared/analysis-labels.js";
 import { WelcomeScreen } from "./WelcomeScreen.js";
+import { AccountMenu } from "./AccountMenu.js";
 import { GithubStarLink } from "./GithubStarLink.js";
 import { pageMetadata, publicLanguage, publicPath } from "../../shared/public-site.js";
 import { Icon } from "../../shared/Icon.js";
@@ -34,6 +35,7 @@ import "../../styles/companion-shell.css";
 import "../../styles/companion-results.css";
 import "../../styles/companion-portrait.css";
 import "../../styles/companion-navigation.css";
+import "../../styles/workspace-ui.css";
 
 type Language = "en" | "zh";
 const analysisAccessHeaders = { "X-Koma-Client": "1" };
@@ -57,7 +59,6 @@ const copy = {
       failed: "Try again"
     } as Record<string, string>,
     help: "How it works",
-    admin: "Manage",
     history: "My jobs",
     historyTitle: "My analysis history",
     historyText: "Your GitHub account keeps your video history available across browsers and devices.",
@@ -152,7 +153,7 @@ const copy = {
     jobMissing: "This analysis could not be found.",
     analyzingRemote: "ANALYZING · REMOTE VIDEO",
     analyzingLocal: "ANALYZING · LOCAL VIDEO",
-    progressTitle: "Generating the video analysis.",
+    progressTitle: "Analyzing video",
     progressText: "Processing speech and key frames. When the analysis is ready, click a result to jump to the matching moment.",
     processing: "Processing",
     preparing: "Preparing…",
@@ -214,9 +215,9 @@ const copy = {
     aboutText: "From a plain-language request to a replayable analysis and structured JSON.",
     aboutSteps: [
       { title: "1 · Describe the result", text: "Upload a local video or paste a direct MP4 URL, then describe what you need. Quick additions can be combined, and AI can turn the full request into editable JSON." },
-      { title: "2 · Review the result", text: "Koma combines audio and key frames into a summary, chapters, tags, subtitles, and structured data. Click any timestamp, subtitle, chapter, tag, or key frame to return to that moment." },
-      { title: "3 · Return from My jobs", text: "Your library belongs to your GitHub account. Search titles and summaries, reopen a running analysis, retry failed jobs when their source is available, or delete your own files." },
-      { title: "4 · Private records and administration", text: "New videos are private to your account; copied links require the same account. Older unclaimed replay links keep their previous access. Manage remains a separate administrator area for providers and global job management." }
+      { title: "2 · Review the result", text: "Koma combines audio and key frames into a summary, chapters, tags, subtitles, and structured data. Click any timestamp, subtitle, chapter, tag, or key frame to return to that moment. AI output can be inaccurate; check it against the source." },
+      { title: "3 · Open My videos", text: "Your library belongs to your GitHub account. Search titles and summaries, reopen a running analysis, retry failed jobs when their source is available, or delete your own files." },
+      { title: "4 · Private records", text: "New videos require owner or administrator access; copied replay links require an authorized account. Older unclaimed replay links keep their previous access. Issued download links remain usable until expiry." }
     ],
     aboutMuted: "Sign in with GitHub to recover your library on another device. If this browser has older anonymous jobs, review and claim them in the library. Templates stay in this browser, separately for each account. Previously downloaded or cached public copies cannot be recalled.",
     gotIt: "Got it",
@@ -238,7 +239,6 @@ const copy = {
       failed: "需要重试"
     } as Record<string, string>,
     help: "使用说明",
-    admin: "管理",
     history: "我的任务",
     historyTitle: "我的分析记录",
     historyText: "使用 GitHub 账号保存和管理视频，换个浏览器也能继续。",
@@ -333,7 +333,7 @@ const copy = {
     jobMissing: "找不到这次分析",
     analyzingRemote: "ANALYZING · REMOTE VIDEO",
     analyzingLocal: "ANALYZING · LOCAL VIDEO",
-    progressTitle: "正在生成视频分析结果。",
+    progressTitle: "正在分析视频",
     progressText: "正在处理语音和关键帧。完成后可点击结果，回到原片对应时刻。",
     processing: "处理中",
     preparing: "正在准备…",
@@ -395,9 +395,9 @@ const copy = {
     aboutText: "用一句话描述要求，得到可回看、可定位的分析结果和结构化 JSON。",
     aboutSteps: [
       { title: "1 · 说清楚想要什么", text: "上传本地视频或粘贴 MP4 视频直链，再直接描述结果要包含什么。快速补充可以同时选择，也可以让 AI 先整理成可编辑的 JSON。" },
-      { title: "2 · 查看分析结果", text: "Koma 会结合声音和关键帧生成总结、章节、标签、字幕与结构化数据。点击时间、字幕、章节、标签或关键帧，都能跳回视频对应位置。" },
+      { title: "2 · 查看分析结果", text: "Koma 会结合声音和关键帧生成总结、章节、标签、字幕与结构化数据。点击时间、字幕、章节、标签或关键帧，都能跳回视频对应位置。AI 输出可能有误，请对照原片核实。" },
       { title: "3 · 回到自己的资料库", text: "资料库跟随你的 GitHub 账号。可以搜索标题和摘要、重新打开任务、在来源可用时重试失败的分析，也可以删除自己的视频和文件。" },
-      { title: "4 · 私人记录与管理", text: "新视频仅本人账号可见，复制的链接也需要登录同一账号。未认领的旧版回看链接保留原有访问方式。“管理”仍是独立的管理员入口，用于配置模型和管理全部任务。" }
+      { title: "4 · 私人记录", text: "新视频需要本人或管理员权限，复制的回看链接也需要登录有权限的账号。未认领的旧版回看链接保留原有访问方式。已签发的下载链接在到期前仍可使用。" }
     ],
     aboutMuted: "换个浏览器登录同一 GitHub 账号，就能继续查看资料库。如果当前浏览器有旧匿名任务，可以在资料库中查看并认领。分析模板按账号保存在当前浏览器；此前已下载或缓存的文件副本无法收回。",
     gotIt: "知道了",
@@ -521,8 +521,8 @@ function Glyph({ name, size = 18 }: { name: GlyphName; size?: number }) {
 
 function Brand({ onClick, label }: { onClick?: () => void; label?: string }) {
   return onClick
-    ? <button type="button" className="brand-lockup brand-button" onClick={onClick} aria-label={label}><CompanionPortrait className="brand-icon" variant="logo" /><span className="brand-text"><strong>Koma</strong><span>VIDEO COMPANION</span></span></button>
-    : <div className="brand-lockup"><CompanionPortrait className="brand-icon" variant="logo" /><div><strong>Koma</strong><span>VIDEO COMPANION</span></div></div>;
+    ? <button type="button" className="brand-lockup brand-button" onClick={onClick} aria-label={label}><CompanionPortrait className="brand-icon" /><span className="brand-text"><strong>Koma</strong></span></button>
+    : <div className="brand-lockup"><CompanionPortrait className="brand-icon" /><div><strong>Koma</strong></div></div>;
 }
 
 function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
@@ -543,7 +543,6 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
   const [error, setError] = useState("");
   const [showSettings, setShowSettings] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
-  const [showMoreMenu, setShowMoreMenu] = useState(false);
   const [showAdvancedSettings, setShowAdvancedSettings] = useState(false);
   const [editorInitialSchema, setEditorInitialSchema] = useState(initialAnalysisConfig.draft.outputSchema);
   const [editorInitialFieldDescriptions, setEditorInitialFieldDescriptions] = useState<AnalysisFieldDescription[]>(initialAnalysisConfig.draft.fieldDescriptions ?? []);
@@ -581,7 +580,6 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
   const jobNavigationRevisionRef = useRef(0);
   const languageRef = useRef(language);
   const routeErrorCopyRef = useRef({ jobMissing: t.jobMissing, startFailed: t.startFailed });
-  const moreMenuRef = useRef<HTMLDivElement>(null);
   languageRef.current = language;
   routeErrorCopyRef.current = { jobMissing: t.jobMissing, startFailed: t.startFailed };
   const hasResult = job?.status === "done" && job.result;
@@ -657,23 +655,6 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
   }, []);
 
   useEffect(() => {
-    if (!showMoreMenu) return;
-    function handlePointerDown(event: globalThis.PointerEvent) {
-      if (moreMenuRef.current?.contains(event.target as Node)) return;
-      setShowMoreMenu(false);
-    }
-    function handleKeyDown(event: globalThis.KeyboardEvent) {
-      if (event.key === "Escape") setShowMoreMenu(false);
-    }
-    document.addEventListener("pointerdown", handlePointerDown);
-    document.addEventListener("keydown", handleKeyDown);
-    return () => {
-      document.removeEventListener("pointerdown", handlePointerDown);
-      document.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [showMoreMenu]);
-
-  useEffect(() => {
     if (auth.loading) return;
     const syncJobRoute = async () => {
       const routeLanguage = publicLanguage(window.location.pathname);
@@ -688,7 +669,6 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
       setShowAdvancedSettings(false);
       setShowSettings(false);
       setShowHistory(false);
-      setShowMoreMenu(false);
       setUploadPercent(null);
 
       const revision = jobNavigationRevisionRef.current + 1;
@@ -1084,7 +1064,7 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
 
   async function signOut() {
     setSigningOut(true); setAccountError("");
-    try { await auth.logout(); leaveJob(); setShowMoreMenu(false); }
+    try { await auth.logout(); leaveJob(); }
     catch { setAccountError(language === "zh" ? "暂时无法退出，请重试。" : "Could not sign out. Please try again."); }
     finally { setSigningOut(false); }
   }
@@ -1104,29 +1084,24 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
 
   const libraryActive = Boolean(job || showHistory);
 
-  return <div className={`app-shell companion-ui${job?.result ? " has-result" : ""}`}>
+  return <div className={`app-shell companion-ui workspace-ui${job?.result ? " has-result" : ""}`}>
     <header className="site-header"><div className="header-inner"><Brand onClick={job || showHistory ? goHome : undefined} label={t.backHome} />
-      {authenticated && <nav className="workspace-nav" aria-label={language === "zh" ? "工作区导航" : "Workspace navigation"}><button type="button" className={!libraryActive ? "selected" : ""} aria-current={!libraryActive ? "page" : undefined} onClick={goHome}>{language === "zh" ? "新分析" : "New analysis"}</button><button type="button" className={libraryActive ? "selected" : ""} aria-current={libraryActive ? "page" : undefined} onClick={enterLibrary}>{language === "zh" ? "资料库" : "Library"}{Boolean(auth.session?.legacyJobCount) && <i aria-label={language === "zh" ? "有旧任务可找回" : "Older jobs available"} />}</button></nav>}
+      {authenticated && <nav className="workspace-nav" aria-label={language === "zh" ? "工作区导航" : "Workspace navigation"}><button type="button" className={!libraryActive ? "selected" : ""} aria-current={!libraryActive ? "page" : undefined} disabled={generatingSchema} onClick={goHome}>{language === "zh" ? "新建分析" : "New analysis"}</button><button type="button" className={libraryActive ? "selected" : ""} aria-current={libraryActive ? "page" : undefined} disabled={generatingSchema} onClick={enterLibrary}>{language === "zh" ? "我的视频" : "My videos"}{Boolean(auth.session?.legacyJobCount) && <i aria-label={language === "zh" ? "有旧任务可找回" : "Older jobs available"} />}</button></nav>}
       <div className="header-actions"><GithubStarLink language={language} />{isPublicEntry && !authenticated ? <a className="header-button language-button" href={publicPath(language === "en" ? "zh" : "en")} hrefLang={language === "en" ? "zh-CN" : "en"}>{t.language}</a> : <button className="header-button language-button" type="button" disabled={generatingSchema} onClick={() => { const next = language === "en" ? "zh" : "en"; if (isPublicEntry) window.history.replaceState({}, "", publicPath(next)); setLanguage(next); }}>{t.language}</button>}
-      {authenticated && <span className="account-identity">{auth.session?.user?.avatarUrl && <img src={auth.session.user.avatarUrl} alt="" referrerPolicy="no-referrer" />}<span>{auth.session?.user?.login}</span></span>}
-      <div className="header-more" ref={moreMenuRef}><button className="header-more-trigger" type="button" disabled={generatingSchema} aria-label={language === "zh" ? "更多选项" : "More options"} aria-expanded={showMoreMenu} aria-controls="header-more-menu" onClick={() => setShowMoreMenu((value) => !value)}><Glyph name="settings" size={17} /></button>{showMoreMenu && <div id="header-more-menu"><button type="button" onClick={() => { setShowMoreMenu(false); setShowSettings(true); }}><Glyph name="info" size={16} />{t.help}</button><a href="/admin"><Glyph name="settings" size={16} />{t.admin}</a>{authenticated && <button type="button" disabled={signingOut} onClick={() => void signOut()}>{signingOut ? (language === "zh" ? "正在退出…" : "Signing out…") : (language === "zh" ? "退出登录" : "Sign out")}</button>}</div>}</div>
+      <AccountMenu language={language} session={auth.session} loading={auth.loading} unavailable={auth.unavailable} disabled={generatingSchema} signingOut={signingOut} onLibrary={enterLibrary} onNew={goHome} onHelp={() => setShowSettings(true)} onSignOut={signOut} onRefresh={auth.refresh} />
     </div></div></header>
 
     <main className="main-shell">
       {accountError && <p className="account-error" role="alert">{accountError}</p>}
-      {auth.loading && !isPublicEntry && !job && <div className="session-loading" role="status"><CompanionPortrait /><span>{language === "zh" ? "正在打开工作区…" : "Opening your workspace…"}</span></div>}
-      {(!auth.loading || isPublicEntry) && !authenticated && !job && <WelcomeScreen language={language} enabled={auth.session?.enabled ?? isPublicEntry} unavailable={auth.unavailable} expired={auth.expired} error={error} onRefresh={auth.refresh} />}
+      {auth.loading && !isPublicEntry && !job && <div className="session-loading" role="status"><span>{language === "zh" ? "正在打开工作区…" : "Opening your workspace…"}</span></div>}
+      {(!auth.loading || isPublicEntry) && !authenticated && !job && <WelcomeScreen language={language} enabled={auth.session?.enabled ?? isPublicEntry} unavailable={auth.unavailable} expired={auth.expired} error={error} onRefresh={auth.refresh} onHelp={() => setShowSettings(true)} />}
       {authenticated && !job && showHistory && <WorkspaceLibrary key={accountId} language={language} onOpen={openHistoryJob} onDelete={deleteOwnedJob} onNew={goHome} onUnauthorized={auth.expire} legacyJobCount={auth.session?.legacyJobCount || 0} onClaimed={auth.refresh} />}
       {authenticated && !job && !showHistory && <section className="landing-layout workspace-compose">
-        <aside className="compose-aside">
-          <div className="compose-intro"><span className="page-label">{language === "zh" ? "你的视频小助手" : "YOUR VIDEO COMPANION"}</span><h1>{language === "zh" ? <>把视频放进来，<br />一起看懂重点。</> : <>Bring a video.<br />Let’s see what’s inside.</>}</h1><p>{language === "zh" ? "找到重点、定位原句，按需提取数据。今天想看哪一段？" : "Find the key ideas, revisit exact moments, and extract the details you need."}</p><button type="button" className="compose-library-link" onClick={enterLibrary}><Icon name="arrow-up-right" size={17} /><span>{language === "zh" ? "去我的资料库看看" : "Open my video library"}</span></button></div>
-          <div className="compose-character"><span className="compose-greeting">{language === "zh" ? "准备好啦，一起开始吧。" : "Ready when you are."}</span><CompanionPortrait priority /></div>
-        </aside>
+        <header className="compose-aside"><div className="compose-intro"><h1>{language === "zh" ? "新建分析" : "New analysis"}</h1><p>{language === "zh" ? "选择视频，填写需要整理的内容。结果会保存在「我的视频」中。" : "Choose a video and describe what you need. Results are saved in My videos."}</p></div></header>
 
         <form className="capture-card" onSubmit={startAnalysis} aria-busy={busy || generatingSchema} aria-label={t.startOne}>
-          <header className="capture-card-head"><div><span>{t.newAnalysis}</span><h2>{t.startOne}</h2></div><div className="capture-journey" aria-hidden="true"><span>{language === "zh" ? "放入视频" : "Add video"}</span><Icon name="arrow-up-right" size={14} /><span>{language === "zh" ? "告诉我要求" : "Make it yours"}</span><Icon name="arrow-up-right" size={14} /><span>{language === "zh" ? "查看分析" : "View results"}</span></div></header>
           <div className="workbench-source">
-            <h3 id="video-source-heading" className="workbench-section-label"><span className="step-number">01</span>{t.sourceLabel}</h3>
+            <h2 id="video-source-heading" className="workbench-section-label">{t.sourceLabel}</h2>
             <div className="mode-switch" role="group" aria-label={t.sourceLabel}>
               <button className={mode === "upload" ? "selected" : ""} type="button" aria-pressed={mode === "upload"} onClick={() => setMode("upload")}><Glyph name="upload" size={16} />{t.upload}</button>
               <button className={mode === "url" ? "selected" : ""} type="button" aria-pressed={mode === "url"} onClick={() => setMode("url")}><Glyph name="link" size={16} />{t.videoUrl}</button>
@@ -1138,7 +1113,7 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
             {sourceError && <p id="analysis-form-error" className="form-error" role="alert">{error}</p>}
           </div>
           <section className="workbench-analysis" aria-labelledby="analysis-mode-heading">
-            <h3 id="analysis-mode-heading" className="workbench-section-label"><span className="step-number">02</span>{t.presetsLabel}</h3>
+            <h2 id="analysis-mode-heading" className="workbench-section-label">{t.presetsLabel}</h2>
             <p className="workbench-section-hint">{t.presetsHint}</p>
             <div className="starter-templates"><span>{language === "zh" ? "从一个用途开始" : "Start with a use case"}</span>{(["learn", "meeting", "products"] as const).map((kind, index) => <button key={kind} type="button" disabled={generatingSchema || busy} onClick={() => applyStarter(kind)}>{(language === "zh" ? ["课程分析", "访谈 / 会议", "产品整理"] : ["Study analysis", "Interview / meeting", "Product details"])[index]}<span aria-hidden="true"><Icon name="arrow-up-right" size={18} /></span></button>)}</div>
             <label className="analysis-request-field">
@@ -1149,7 +1124,7 @@ function App({ initialLanguage }: { initialLanguage?: Language } = {}) {
               <span>{t.quickSuggestions}</span>
               <div>{analysisSuggestions(language).map((suggestion) => {
                 const selected = suggestionIds.includes(suggestion.id);
-                return <button key={suggestion.id} type="button" disabled={generatingSchema} className={selected ? "selected" : ""} aria-pressed={selected} aria-label={`${suggestion.label}: ${suggestion.description}`} onClick={() => toggleSuggestion(suggestion.id)}><i aria-hidden="true"><Icon name={selected ? "check" : "plus"} size={13} /></i><span><strong>{suggestion.label}</strong><small>{suggestion.description}</small></span></button>;
+                return <button key={suggestion.id} type="button" disabled={generatingSchema} className={selected ? "selected" : ""} aria-pressed={selected} aria-label={`${suggestion.label}: ${suggestion.description}`} title={suggestion.description} onClick={() => toggleSuggestion(suggestion.id)}><i aria-hidden="true"><Icon name={selected ? "check" : "plus"} size={13} /></i><span><strong>{suggestion.label}</strong></span></button>;
               })}</div>
             </div>
             <div className={`json-workflow ${hasOutputSchema && !outputSchemaNeedsReview ? "configured" : ""}`}>
@@ -1194,8 +1169,8 @@ function ProgressView({ job, progress, error, onClear, onRetry, retrying, langua
   const stageLabel = job.progress ? t.stage[job.progress.stage] || t.processing : t.processing;
   const steps = progressStepStates(job.progress?.stage || "queued", job.status, safeProgress);
   const failureText = error || job.error || (failed ? job.progress?.detail : "");
-  return <section className="progress-layout"><div className="progress-copy"><span className="page-label">{job.source === "url" ? t.analyzingRemote : t.analyzingLocal}</span><h1>{failed ? (language === "zh" ? "这次没能完成。" : "This one needs another try.") : t.progressTitle}</h1><p>{failed ? (job.retryable ? (language === "zh" ? "来源和分析要求已经保留，可以直接重试。" : "Your source and analysis request are saved. You can retry here.") : (language === "zh" ? "视频来源已不可用，请重新导入视频。" : "The video source is no longer available. Please import it again.")) : t.progressText}</p><strong className="progress-job-title">{job.title}</strong></div>
-    <div className={`progress-card ${failed ? "failed" : ""}`}><div className="progress-mascot"><CompanionPortrait /></div><div className="progress-status"><span aria-live="polite" aria-atomic="true">{stageLabel}</span><strong aria-hidden={failed}>{failed ? <Icon name="alert" size={44} /> : `${safeProgress}%`}</strong></div>{!failed && <div className="progress-track" role="progressbar" aria-label={stageLabel} aria-valuemin={0} aria-valuemax={100} aria-valuenow={safeProgress}><span style={{ width: `${safeProgress}%` }} /></div>}{!failed && <p>{translateProgressDetail(job.progress?.detail, language) || t.preparing}</p>}{failureText && <div className="inline-error" role="alert">{translateServerError(failureText, language, { preserveUnknown: failed })}</div>}<div className="process-list"><span className={steps[0]} aria-current={steps[0] === "current" ? "step" : undefined}>{t.entered}</span><span className={steps[1]} aria-current={steps[1] === "current" ? "step" : undefined}>{t.mediaAnalysis}</span><span className={steps[2]} aria-current={steps[2] === "current" ? "step" : undefined}>{t.readableResult}</span></div>{failed ? <div className="retry-row">{job.owned && job.retryable && <button className="primary-button" type="button" disabled={retrying} onClick={onRetry}>{retrying ? t.starting : t.retry}<Glyph name="arrow" size={17} /></button>}<button className="text-button" type="button" onClick={onClear}>{language === "zh" ? "重新导入视频" : "Import another video"}</button></div> : <button className="text-button" type="button" onClick={onClear}>{t.cancel}</button>}</div>
+  return <section className="progress-layout"><div className="progress-copy"><span className="page-label">{job.source === "url" ? t.analyzingRemote : t.analyzingLocal}</span><h1>{failed ? (language === "zh" ? "分析未完成" : "Analysis incomplete") : t.progressTitle}</h1><p>{failed ? (job.retryable ? (language === "zh" ? "来源和分析要求已经保留，可以直接重试。" : "Your source and analysis request are saved. You can retry here.") : (language === "zh" ? "视频来源已不可用，请重新导入视频。" : "The video source is no longer available. Please import it again.")) : t.progressText}</p><strong className="progress-job-title">{job.title}</strong></div>
+    <div className={`progress-card ${failed ? "failed" : ""}`}><div className="progress-status"><span aria-live="polite" aria-atomic="true">{stageLabel}</span><strong aria-hidden={failed}>{failed ? <Icon name="alert" size={44} /> : `${safeProgress}%`}</strong></div>{!failed && <div className="progress-track" role="progressbar" aria-label={stageLabel} aria-valuemin={0} aria-valuemax={100} aria-valuenow={safeProgress}><span style={{ width: `${safeProgress}%` }} /></div>}{!failed && <p>{translateProgressDetail(job.progress?.detail, language) || t.preparing}</p>}{failureText && <div className="inline-error" role="alert">{translateServerError(failureText, language, { preserveUnknown: failed })}</div>}<div className="process-list"><span className={steps[0]} aria-current={steps[0] === "current" ? "step" : undefined}>{t.entered}</span><span className={steps[1]} aria-current={steps[1] === "current" ? "step" : undefined}>{t.mediaAnalysis}</span><span className={steps[2]} aria-current={steps[2] === "current" ? "step" : undefined}>{t.readableResult}</span></div>{failed ? <div className="retry-row">{job.owned && job.retryable && <button className="primary-button" type="button" disabled={retrying} onClick={onRetry}>{retrying ? t.starting : t.retry}<Glyph name="arrow" size={17} /></button>}<button className="text-button" type="button" onClick={onClear}>{language === "zh" ? "重新导入视频" : "Import another video"}</button></div> : <button className="text-button" type="button" onClick={onClear}>{t.cancel}</button>}</div>
   </section>;
 }
 
@@ -1263,7 +1238,7 @@ function ResultView({ job, onRestart, onDelete, language }: { job: Job; onRestar
     <section className="keyframe-panel" aria-label={t.frameTimeline}><div className="section-heading"><span>{t.keyFrameGallery}</span><small>{t.keyFrameGallerySub}</small></div><div className="frame-gallery">{result.frames.map((frame, index) => <button key={frame.url} type="button" aria-label={`${t.jumpTo} ${formatTime(frame.atMs)}: ${frame.caption || t.keyFrame}`} className={index === selectedFrame ? "active" : ""} onClick={() => { syncToTime(frame.atMs, false); setPreviewFrame(frame); }}><span className="frame-gallery-image"><img src={frame.url} alt={frame.caption || t.keyFrame} /><i>{formatTime(frame.atMs)}</i><em><Glyph name="zoom" size={14} />{t.clickToEnlarge}</em></span><strong>{frame.caption || `${t.keyFrame} ${index + 1}`}</strong></button>)}</div></section>
     <section className="chapters"><div className="section-heading"><span>{t.chapters}</span><small>{result.chapters.length ? `${result.chapters.length} ${t.chaptersCount} · ${t.chaptersSub}` : ""}</small></div>{result.chapters.length ? <div className="chapter-list">{(result.chapters || []).map((chapter, index) => <button type="button" className="chapter" key={`${chapter.startMs}-${index}`} onClick={() => syncToTime(chapter.startMs)}><span className="chapter-rail"><strong>{index + 1}</strong><i>{formatTime(chapter.startMs)} – {formatTime(chapter.endMs)}</i></span><span className="chapter-body"><strong>{chapter.title}</strong><p>{chapter.summary}</p></span><Glyph name="arrow" size={18} /></button>)}</div> : <div className="chapter-empty">{t.noChapters}</div>}</section>
   </div>
-  <aside className="transcript-panel"><div className="panel-heading"><div><span className="page-label">WORDS & MOMENTS</span><h2>{t.subtitlePanel}</h2><p>{t.subtitlePanelText}</p></div><span className="live-dot" /></div>
+  <aside className="transcript-panel"><div className="panel-heading"><div><h2>{t.subtitlePanel}</h2><p>{t.subtitlePanelText}</p></div><span className="live-dot" /></div>
     <div className="transcript-search"><label><span className="sr-only">{language === "zh" ? "搜索字幕" : "Search transcript"}</span><input type="search" value={transcriptQuery} onChange={(event) => setTranscriptQuery(event.target.value)} placeholder={language === "zh" ? "找到你记得的那一句…" : "Find the words you remember…"} onKeyDown={(event) => { if (event.key === "Enter") { event.preventDefault(); jumpMatch(event.shiftKey ? -1 : 1); } }} /></label>{transcriptQuery.trim() && <div className="transcript-search-controls"><span role="status">{matchingLines.length ? `${matchCursor + 1} / ${matchingLines.length}` : (language === "zh" ? "没有找到相关字幕" : "No matching subtitles")}</span><button type="button" disabled={!matchingLines.length} aria-label={language === "zh" ? "上一条匹配字幕" : "Previous match"} onClick={() => jumpMatch(-1)}><Icon name="arrow-up" size={17} /></button><button type="button" disabled={!matchingLines.length} aria-label={language === "zh" ? "下一条匹配字幕" : "Next match"} onClick={() => jumpMatch(1)}><Icon name="arrow-down" size={17} /></button></div>}</div>
     <div className="transcript-list">{result.transcript.length ? result.transcript.map((line, index) => { const active = currentMs >= line.startMs && currentMs < line.endMs; const speaker = line.speaker != null && String(line.speaker).trim() ? `${t.speaker} ${line.speaker}` : t.voice; if (transcriptQuery.trim() && !matchingLines.includes(index)) return null; return <button ref={(element) => { if (element) transcriptRefs.current.set(index, element); else transcriptRefs.current.delete(index); }} type="button" className={`transcript-line ${active ? "active" : ""} ${transcriptQuery.trim() && matchingLines[matchCursor] === index ? "search-current" : ""}`} aria-pressed={active} key={`${line.startMs}-${index}`} onClick={() => { syncToTime(line.startMs); if (transcriptQuery.trim()) setMatchCursor(matchingLines.indexOf(index)); }}><span className="line-rail"><strong>{formatTime(line.startMs)}</strong><i>{formatTime(line.endMs)}</i></span><span className="line-body"><small><i />{speaker}</small><p><HighlightedText text={line.text} query={transcriptQuery} /></p><em><Glyph name="play" size={11} />{t.playFrom} {formatTime(line.startMs)}</em></span></button>; }) : <div className="transcript-empty">{t.noSpeech}</div>}</div><div className="panel-note"><Glyph name="link" size={14} />{job.visibility === "legacy-link" ? (language === "zh" ? "旧版回看链接 · 请谨慎转发" : "Legacy replay link · share with care") : t.remaining}</div></aside>
 
@@ -1525,18 +1500,29 @@ function AdvancedSettingsDialog({ language, outputSchema, fieldDescriptions, ini
 function InfoModal({ onClose, language }: { onClose: () => void; language: Language }) {
   const t = copy[language];
   const closeRef = useRef<HTMLButtonElement>(null);
+  const modalRef = useRef<HTMLDivElement>(null);
   // onClose 是父组件内联箭头函数，每次渲染引用都会变；
   // 用 ref 存最新值，effect 只在挂载时跑一次（聚焦 + 监听 Escape），
   // 避免父组件重渲染时焦点被反复抢回关闭按钮。
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
   useEffect(() => {
+    const previousFocus = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     closeRef.current?.focus();
-    const onKeyDown = (event: globalThis.KeyboardEvent) => { if (event.key === "Escape") onCloseRef.current(); };
+    const onKeyDown = (event: globalThis.KeyboardEvent) => {
+      if (event.key === "Escape") { event.preventDefault(); onCloseRef.current(); }
+      if (event.key !== "Tab") return;
+      const controls = modalRef.current?.querySelectorAll<HTMLElement>('button:not(:disabled), a[href], [tabindex="0"]');
+      if (!controls?.length) return;
+      const first = controls[0], last = controls[controls.length - 1];
+      if (event.shiftKey && document.activeElement === first) { event.preventDefault(); last.focus(); }
+      else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
+    };
     window.addEventListener("keydown", onKeyDown);
-    return () => window.removeEventListener("keydown", onKeyDown);
+    return () => { window.removeEventListener("keydown", onKeyDown); if (previousFocus?.isConnected) previousFocus.focus(); };
+
   }, []);
-  return <div className="modal-backdrop" role="presentation" onClick={onClose}><div className="info-modal" role="dialog" aria-modal="true" aria-labelledby="info-title" onClick={(event) => event.stopPropagation()}><button ref={closeRef} className="modal-close" type="button" onClick={onClose} aria-label={t.close}><Icon name="close" size={20} /></button><div className="info-modal-head"><CompanionPortrait /><div><span className="page-label">KOMA GUIDE</span><h2 id="info-title">{t.aboutTitle}</h2><p>{t.aboutText}</p></div></div><div className="help-steps">{t.aboutSteps.map((step) => <section key={step.title}><strong>{step.title}</strong><p>{step.text}</p></section>)}</div><p className="modal-muted">{t.aboutMuted}</p><button className="primary-button" type="button" onClick={onClose}>{t.gotIt}<Glyph name="arrow" size={17} /></button></div></div>;
+  return <div className="modal-backdrop" role="presentation" onClick={onClose}><div className="info-modal" ref={modalRef} role="dialog" aria-modal="true" aria-labelledby="info-title" onClick={(event) => event.stopPropagation()}><button ref={closeRef} className="modal-close" type="button" onClick={onClose} aria-label={t.close}><Icon name="close" size={20} /></button><div className="info-modal-head"><CompanionPortrait /><div><h2 id="info-title">{t.aboutTitle}</h2><p>{t.aboutText}</p></div></div><div className="help-steps">{t.aboutSteps.map((step) => <section key={step.title}><strong>{step.title}</strong><p>{step.text}</p></section>)}</div><p className="modal-muted">{t.aboutMuted}</p><button className="primary-button" type="button" onClick={onClose}>{t.gotIt}<Glyph name="arrow" size={17} /></button></div></div>;
 }
 
 export default App;

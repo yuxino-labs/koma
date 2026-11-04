@@ -1,13 +1,14 @@
-# Koma editor avatar
+# Koma family mascot
 
-The current logo is a black-and-white female editor with a short black bob, beret, and white shirt collar. It matches the [page portrait](visual-assets.md). The user requested a new character style for the website and Web app on 2026-11-04.
+Koma belongs to the Kiri, Mimi, and Fuwa product family. The current avatar retains the softly colored chibi face, pearl-pink hair, side ponytail and pale apricot hair ribbon. It is a simple head-and-shoulders portrait in a plain ivory top, with actual transparent background.
 
-- [Avatar](../public/koma-editor-logo.png): 512 × 512 RGBA PNG; public header, admin header/login, social previews, and both READMEs. 226,812 bytes; SHA-256 `cb5051eebc24a11628ce453b742cfbf985e0c615b1fda42dd60041fefbbff4b1`.
-- Browser icons: `favicon.ico` (16/32/48), `favicon-48.png`, `favicon-192.png`, and `apple-touch-icon.png` (180). All derive from the same avatar. `index.html` versions the icon URLs to refresh cached artwork.
-- Keep the complete beret and bob visible; do not apply the previous circular crop.
+The user explicitly removed the recording motif and elaborate lower body: no clapperboard, hands, film clip, chest bow, frills, frame, stars, background disk or ornamental backing. Keep the face and restrained family style.
 
-Generated with the built-in image_gen tool, using the new page portrait as the identity reference. Size exports preserve the generated alpha; no recoloring or background removal was applied. Earlier ponytail assets are inactive historical files.
+- [Avatar](../public/koma-family-logo.png): 512 × 512 RGBA PNG; 354358 bytes; SHA-256 df52a5ae49bcef52f255c82debb9f96871438627774355d9843513769906f36b.
+- Shared by public branding, help, README, social previews and existing admin branding. The account control uses the user's own GitHub avatar.
+- Browser exports: favicon.ico (16/32/48), favicon-48.png, favicon-192.png and apple-touch-icon.png (180).
+- Edited with built-in image_gen; exports preserve its alpha channel.
 
-## Generation prompt
+## Current edit prompt
 
-Create the matching small avatar logo for the Koma mascot in the immediately preceding image. Preserve exactly the new young adult woman's short black bob, asymmetric fringe, black beret, confident gentle smile and crisp black-and-white editorial manga drawing style. Square composition, front-facing close-up head with a hint of white shirt collar, face occupies most of image, entire beret and bob inside the frame with 8 percent padding. Simplify contours and eye detail for clear 32px favicon readability. Only head and small collar: no hands, no body, no clapperboard. Pure white face, solid charcoal/black hair and beret, minimal flat neutral gray. No gradient, color, backdrop, frame, text, watermark or extra objects. Actual transparent background around complete silhouette. This must be recognizably the SAME character as the preceding portrait, not the older ponytail girl.
+Use case: precise-object-edit. Edit the supplied Koma girl avatar. The user likes the FACE: preserve her face, eye design, expression, pastel hair colors, side ponytail, and overall chibi anime identity very closely. Replace the lower-body composition with a clean HEAD-AND-SHOULDERS avatar: a large face and hair, with only a small amount of shoulders and a simple plain ivory round-neck top visible at the bottom. Remove BOTH hands, the clapperboard, all recording/film accessories including the film-strip hairclip, chest bow, frilly collar, puff sleeves and visible torso/buttons. Keep the one modest pale-apricot ribbon tying her side ponytail; simplify its flower center to a plain knot. No objects being held, no recording motif. Do not change the appealing face or make her older. Compact square avatar framing, with complete hair silhouette and comfortable margin. Fully transparent alpha outside the character. No circle, frame, badge, stars, sparkles, decorative background, shadow, halo, white disk, text or watermark. Natural simple shoulder silhouette at the bottom, not a full-body chibi doll. Clean and restrained while retaining the soft colored anime family style.

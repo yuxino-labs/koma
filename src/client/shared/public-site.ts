@@ -22,7 +22,7 @@ export function pageMetadata(language: PublicLanguage, indexable = true): string
   if (!indexable) return `${base}\n<meta data-koma-seo name="robots" content="noindex, nofollow, noarchive" />`;
   const url = PUBLIC_ORIGIN + publicPath(language);
   const lang = language === "zh" ? "zh-CN" : "en";
-  const image = `${PUBLIC_ORIGIN}/koma-editor-logo.png`;
+  const image = `${PUBLIC_ORIGIN}/koma-family-logo.png`;
   const description = descriptions[language];
   const graph = {
     "@context": "https://schema.org",
@@ -41,8 +41,8 @@ export function pageMetadata(language: PublicLanguage, indexable = true): string
     `<link data-koma-seo rel="alternate" hreflang="x-default" href="${PUBLIC_ORIGIN}/" />`,
     meta("og:type", "website", true), meta("og:site_name", "Koma", true), meta("og:title", title, true), meta("og:description", description, true), meta("og:url", url, true),
     meta("og:locale", language === "zh" ? "zh_CN" : "en_US", true), meta("og:locale:alternate", language === "zh" ? "en_US" : "zh_CN", true),
-    meta("og:image", image, true), meta("og:image:type", "image/png", true), meta("og:image:width", "512", true), meta("og:image:height", "512", true), meta("og:image:alt", language === "zh" ? "Koma 黑白人物标志" : "Koma black-and-white character logo", true),
-    meta("twitter:card", "summary"), meta("twitter:title", title), meta("twitter:description", description), meta("twitter:image", image), meta("twitter:image:alt", language === "zh" ? "Koma 黑白人物标志" : "Koma black-and-white character logo"),
+    meta("og:image", image, true), meta("og:image:type", "image/png", true), meta("og:image:width", "512", true), meta("og:image:height", "512", true), meta("og:image:alt", language === "zh" ? "Koma 人物标志" : "Koma character logo", true),
+    meta("twitter:card", "summary"), meta("twitter:title", title), meta("twitter:description", description), meta("twitter:image", image), meta("twitter:image:alt", language === "zh" ? "Koma 人物标志" : "Koma character logo"),
     `<script data-koma-seo type="application/ld+json">${JSON.stringify(graph).replace(/</g, "\\u003c")}</script>`
   ].join("\n");
 }
