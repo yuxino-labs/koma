@@ -7,3 +7,5 @@ The working area prioritizes video input, analysis requirements, saved videos, p
 The right-hand account menu uses the authenticated user’s GitHub photo or an initial when unavailable. The service’s own mascot must not stand in for the user.
 
 The current mascot is a transparent character cutout on the white interface. Do not restore a circular backing, stars, sparkles, patterns, or a decorative bottom bow.
+
+Use a simple head-and-shoulders portrait with a plain ivory top. Recording accessories, hands and elaborate clothing were explicitly removed; keep the face as the focus.
