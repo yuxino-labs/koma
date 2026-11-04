@@ -1,6 +1,6 @@
 # Personal workspace and family mascot
 
-Status: implemented for review; merging and deployment require the user's decision because this is a broad redesign.
+Status: approved for merge and deployment by the user on 2026-11-04. The final mascot is a simple transparent head-and-shoulders portrait; recording props and decorative backgrounds were removed after review.
 
 ## User decisions
 

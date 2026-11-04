@@ -1,6 +1,6 @@
 # Koma design system
 
-状态：**待合并的实现规范**。本轮按用户选择改为紧凑工具界面，人物属于 Kiri、Mimi、Fuwa 家族。范围见 [个人工作区与家族人物设计](docs/plans/2026-11-04-personal-workspace-design.md)。历史 Frame Atelier、Video Companion 方案不再决定新人物和公共布局；本文不代表线上已发布。
+状态：**已确认的实现规范**。本轮按用户选择改为紧凑工具界面，人物属于 Kiri、Mimi、Fuwa 家族。范围见 [个人工作区与家族人物设计](docs/plans/2026-11-04-personal-workspace-design.md)。历史 Frame Atelier、Video Companion 方案不再决定新人物和公共布局；发布状态以部署记录为准。
 
 ## 目的
 
