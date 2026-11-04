@@ -27,7 +27,7 @@ Login initiation is limited to 100 requests per IP per UTC day on a single serve
 
 A missing/invalid request header returns `403`; with that check passed, no account session returns `401`. When both `ADMIN_PASSWORD` and `ANALYSIS_REQUIRE_ADMIN=true` are set, the same request must also carry a valid `koma_admin` session, or it returns `403`. An administrator session alone cannot submit a Web job. Administration writes retain their separate `x-koma-admin: 1` header.
 
-The Koma UI sends cookies and headers automatically. The curl examples below assume `cookies.txt` already contains a valid Koma account session from the browser authorization flow; this API does not provide password, PAT, or machine-token login. In administrator-restricted mode, the cookie jar must also contain the administrator session. Use the [local CLI](../README.md#cli) to analyze files locally without Web authentication.
+The Koma UI sends cookies and headers automatically. The curl examples below assume `cookies.txt` already contains a valid Koma account session from the browser authorization flow; this API does not provide password, PAT, or machine-token login. In administrator-restricted mode, the cookie jar must also contain the administrator session. Use the [local CLI](../README.en.md#cli) to analyze files locally without Web authentication.
 
 ## Build a JSON shape with AI
 

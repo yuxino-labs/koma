@@ -1,4 +1,4 @@
-/* Native close-up artwork: preserve the face, bow, and single ponytail. */
+/* Keep the editor mascot’s complete beret, bob, and clapperboard visible. */
 .app-shell.companion-ui .companion-portrait {
   display: block;
   position: relative;
@@ -22,7 +22,7 @@
   max-width: none;
   max-height: none;
   margin: 0;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center top;
   transform: none;
   transform-origin: center;
@@ -38,7 +38,7 @@
 .app-shell.companion-ui .welcome-character:hover > .companion-portrait { transform: translateY(-3px) rotate(1deg); }
 .app-shell.companion-ui .compose-character > .companion-portrait { width: 230px; height: 230px; margin: 0; }
 .app-shell.companion-ui .compose-character > .compose-greeting { z-index: 1; }
-.app-shell.companion-ui .brand-lockup > .companion-portrait { width: 46px; height: 46px; border-radius: 50%; }
+.app-shell.companion-ui .brand-lockup > .companion-portrait { width: 46px; height: 46px; border-radius: 0; }
 .app-shell.companion-ui .brand-lockup > .companion-portrait > img { object-fit: contain; }
 .app-shell.companion-ui .session-loading > .companion-portrait { width: 130px; height: 130px; }
 .app-shell.companion-ui .library-empty > .companion-portrait { width: 190px; height: 190px; margin: 0 auto 20px; }

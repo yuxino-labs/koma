@@ -24,6 +24,8 @@ Before upgrading, back up the database and persistent storage and pause submissi
 
 The schema migration is additive, but an older server does not understand private account ownership. **Do not roll back to that server with job and media routes exposed.** Keep the service in maintenance mode while restoring a consistent database/storage snapshot or fixing forward, and restore public traffic only when account-aware access checks are in place. Preserve post-upgrade data separately before any snapshot restoration. Deleting the new ownership tables is not a privacy-safe rollback.
 
+If saving a fully received video to OSS fails, Koma retains the complete local copy on the server so its owner can retry. Deleting the job also removes that retained copy.
+
 ## Enable the console
 
 Set the administrator password and a separate encryption secret:

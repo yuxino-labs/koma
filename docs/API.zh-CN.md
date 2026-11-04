@@ -27,7 +27,7 @@ OAuth 尝试有效期为十分钟，使用一次性 state、独立的 `koma_oaut
 
 请求头缺失或错误返回 `403`；通过该校验后，没有账号会话返回 `401`。同时配置 `ADMIN_PASSWORD` 与 `ANALYSIS_REQUIRE_ADMIN=true` 时，还必须携带有效的 `koma_admin` 会话，否则返回 `403`。只有管理员会话不能提交网页任务。后台写操作仍使用独立的 `x-koma-admin: 1` 请求头。
 
-Koma 界面会自动发送 Cookie 和请求头。下方 curl 示例假设 `cookies.txt` 已包含通过浏览器授权获得的有效 Koma 账号会话；此 API 不提供密码、PAT 或机器令牌登录。管理员限定模式还需要同一 Cookie Jar 中的管理员会话。无需网页登录的本地文件分析可使用[本地 CLI](../README.zh-CN.md#cli)。
+Koma 界面会自动发送 Cookie 和请求头。下方 curl 示例假设 `cookies.txt` 已包含通过浏览器授权获得的有效 Koma 账号会话；此 API 不提供密码、PAT 或机器令牌登录。管理员限定模式还需要同一 Cookie Jar 中的管理员会话。无需网页登录的本地文件分析可使用[本地 CLI](../README.md#cli)。
 
 ## 用 AI 整理 JSON 结构
 
